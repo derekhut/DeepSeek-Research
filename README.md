@@ -1,47 +1,48 @@
-# Open Deep Research Web UI
+# AI Camp 深度研究助手
 
-A modern, interactive web interface built on top of the original [Deep Research CLI](https://github.com/dzhng/deep-research) project. This web app transforms the command-line research assistant into an intuitive, visually appealing experience using Next.js and shadcn/ui.
+一个基于DeepSeek模型的现代化交互式研究助手网页界面。该项目利用Next.js和shadcn/ui构建，为用户提供直观、美观的研究体验。
 
-## Overview
+## 概述
 
-Open Deep Research Web UI is an AI-powered research assistant that transforms the original CLI tool into a modern web interface using Next.js and shadcn/ui. Try it out at [anotherwrapper.com/open-deep-research](https://anotherwrapper.com/open-deep-research) with your own API keys, or host it yourself.
+AI Camp 深度研究助手是一个AI驱动的研究工具，专为教学和研究目的设计。该项目基于Next.js和shadcn/ui构建现代网页界面，可使用自己的API密钥托管和使用。
 
-The system combines search engines (via FireCrawl), web scraping, and language models (via OpenAI) to perform deep research on any topic. Key features include:
+系统结合了搜索引擎、网页抓取和大型语言模型（通过DeepSeek和OpenAI）来对任何主题进行深入研究。主要功能包括：
 
-- **Intelligent Research Process:**
+- **智能研究流程:**
 
-  - Performs iterative research by recursively exploring topics in depth
-  - Uses LLMs to generate targeted search queries based on research goals
-  - Creates follow-up questions to better understand research needs
-  - Processes multiple searches and results in parallel for efficiency
-  - Configurable depth and breadth parameters to control research scope
+  - 通过递归深入探索主题执行迭代研究
+  - 使用大型语言模型根据研究目标生成有针对性的搜索查询
+  - 创建后续问题以更好地理解研究需求
+  - 并行处理多个搜索和结果以提高效率
+  - 可配置深度和广度参数以控制研究范围
 
-- **Research Output:**
+- **研究输出:**
 
-  - Produces detailed markdown reports with findings and sources
-  - Real-time progress tracking of research steps
-  - Built-in markdown viewer for reviewing results
-  - Downloadable research reports
+  - 生成包含发现和来源的详细markdown报告
+  - 实时跟踪研究步骤的进度
+  - 内置markdown查看器用于审阅结果
+  - 可下载的研究报告
 
-- **Modern Interface:**
-  - Interactive controls for adjusting research parameters
-  - Visual feedback for ongoing research progress
-  - HTTP-only cookie storage for API keys
+- **现代界面:**
+  - 用于调整研究参数的交互式控件
+  - 提供研究进度的可视化反馈
+  - 使用HTTP-only cookie安全存储API密钥
 
-The system maintains the core research capabilities of the original CLI while providing an intuitive visual interface for controlling and monitoring the research process.
+系统提供了直观的可视化界面来控制和监控研究过程，使研究变得更加高效和易于理解。
 
-## Sponsors
+## 支持模型
 
-This project is proudly sponsored by [AnotherWrapper](https://anotherwrapper.com).
+本项目支持多种AI模型：
 
-[![Sponsored by Anotherwrapper](https://anotherwrapper.com/og.png)](https://anotherwrapper.com)
+- **OpenAI模型** - 包括GPT-4o和GPT-3.5 Turbo
+- **DeepSeek模型** - 集成DeepSeek V3
 
 ## Getting Started
 
-### Prerequisites
+### 前提条件
 
-- Node.js v14 or later
-- API keys for OpenAI and FireCrawl
+- Node.js v14或更高版本
+- OpenAI、DeepSeek和FireCrawl的API密钥
 
 ### Installation
 
@@ -53,14 +54,15 @@ This project is proudly sponsored by [AnotherWrapper](https://anotherwrapper.com
    npm install
    ```
 
-2. **Configure Environment**
+2. **配置环境**
 
-   Create `.env.local` and add:
+   创建`.env.local`文件并添加：
 
    ```bash
    OPENAI_API_KEY=your-openai-api-key
+   DEEPSEEK_API_KEY=your-deepseek-api-key
    FIRECRAWL_KEY=your-firecrawl-api-key
-   NEXT_PUBLIC_ENABLE_API_KEYS=false  # Set to false to disable API key dialog
+   NEXT_PUBLIC_ENABLE_API_KEYS=false  # 设置为false禁用API密钥对话框
    ```
 
 3. **Run the App**
@@ -69,20 +71,19 @@ This project is proudly sponsored by [AnotherWrapper](https://anotherwrapper.com
    ```
    Visit [http://localhost:3000](http://localhost:3000)
 
-## API Key Management
+## API密钥管理
 
-By default (`NEXT_PUBLIC_ENABLE_API_KEYS=true`), the app includes an API key input dialog that allows users to try out the research assistant directly in their browser using their own API keys. Keys are stored securely in HTTP-only cookies and are never exposed to client-side JavaScript.
+默认情况下（`NEXT_PUBLIC_ENABLE_API_KEYS=true`），应用程序包含一个API密钥输入对话框，允许用户使用自己的API密钥直接在浏览器中试用研究助手。密钥安全地存储在HTTP-only cookie中，不会暴露给客户端JavaScript。
 
-For your own deployment, you can disable this dialog by setting `NEXT_PUBLIC_ENABLE_API_KEYS=false` and configure the API keys directly in your `.env.local` file instead.
+对于自己的部署，可以通过设置`NEXT_PUBLIC_ENABLE_API_KEYS=false`来禁用此对话框，并在`.env.local`文件中直接配置API密钥。
 
-## License
+## 许可证
 
-MIT License. Feel free to use and modify the code for your own projects as you wish.
+MIT许可证。您可以根据需要自由使用和修改代码用于自己的项目。
 
-## Acknowledgements
+## 致谢
 
-- **Original CLI:** [dzhng/deep-research](https://github.com/dzhng/deep-research)
-- **Sponsor:** [AnotherWrapper](https://anotherwrapper.com)
-- **Tools:** Next.js, shadcn/ui, anotherwrapper, Vercel AI SDK
+- **工具:** Next.js, shadcn/ui, Vercel AI SDK
+- **模型集成:** OpenAI, DeepSeek
 
-Happy researching!
+祝您研究愉快！
