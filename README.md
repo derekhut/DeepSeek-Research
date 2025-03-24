@@ -49,7 +49,7 @@ AI Camp 深度研究助手是一个AI驱动的研究工具，专为教学和研�
 1. **Clone and Install**
 
    ```bash
-   git clone https://github.com/fdarkaou/open-deep-research.git
+   git clone https://github.com/SCLS-AI-Camp/DeepSeek-Research.git
    cd open-deep-research
    npm install
    ```

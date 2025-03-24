@@ -74,7 +74,7 @@ export function ApiKeyDialog({ show, onClose, onSuccess }: ApiKeyDialogProps) {
                     over your data and API key management.
                   </p>
                   <a
-                    href="https://github.com/fdarkaou/open-deep-research"
+                    href="https://github.com/SCLS-AI-Camp/DeepSeek-Research"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center mt-1 text-zinc-700 hover:text-zinc-900 transition-colors"
@@ -196,7 +196,7 @@ export function ApiKeyDialog({ show, onClose, onSuccess }: ApiKeyDialogProps) {
           </div>
           <div className="flex items-center justify-center sm:justify-end space-x-4 text-xs text-zinc-500">
             <a
-              href="https://github.com/fdarkaou/open-deep-research"
+              href="https://github.com/SCLS-AI-Camp/DeepSeek-Research"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-zinc-600 hover:text-zinc-900 transition-colors"
