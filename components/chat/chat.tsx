@@ -353,11 +353,9 @@ export function Chat({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="text-xs md:text-base text-muted-foreground/80 max-w-[340px] mx-auto leading-relaxed"
+                    className="text-xs md:text-base text-muted-foreground/80 max-w-[400px] mx-auto leading-relaxed"
                   >
-                    An open source alternative to OpenAI and Gemini's deep
-                    research capabilities. Ask any question to generate a
-                    comprehensive report.
+                    基于DeepSeek模型的深度研究助手。
                   </motion.p>
 
                   <motion.div

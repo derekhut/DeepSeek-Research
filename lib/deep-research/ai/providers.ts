@@ -1,29 +1,47 @@
-import { createOpenAI } from '@ai-sdk/openai';
-import { getEncoding } from 'js-tiktoken';
+import { createOpenAI } from "@ai-sdk/openai";
+import { createDeepSeek } from "@ai-sdk/deepseek";
+import { getEncoding } from "js-tiktoken";
 
-import { RecursiveCharacterTextSplitter } from './text-splitter';
+import { RecursiveCharacterTextSplitter } from "./text-splitter";
 
 // Model Display Information
 export const AI_MODEL_DISPLAY = {
-  'gpt-4o': {
-    id: 'gpt-4o',
-    name: 'GPT-4o',
-    logo: '/providers/openai.webp',
+  "gpt-4o": {
+    id: "gpt-4o",
+    name: "GPT-4o",
+    logo: "/providers/openai.webp",
     vision: true,
   },
-  'gpt-4o-mini': {
-    id: 'gpt-4o-mini',
-    name: 'GPT-4o mini',
-    logo: '/providers/openai.webp',
+  "gpt-4o-mini": {
+    id: "gpt-4o-mini",
+    name: "GPT-4o mini",
+    logo: "/providers/openai.webp",
     vision: true,
   },
-  'o3-mini': {
-    id: 'o3-mini',
-    name: 'o3 mini',
-    logo: '/providers/openai.webp',
+  "o3-mini": {
+    id: "o3-mini",
+    name: "o3 mini",
+    logo: "/providers/openai.webp",
     vision: false,
   },
+  // DeepSeek Models
+  "deepseek-chat": {
+    id: "deepseek-chat",
+    name: "DeepSeek V3",
+    logo: "/providers/openai.webp",
+    vision: false,
+    provider: "deepseek",
+  },
 } as const;
+
+// 为模型定义添加provider属性
+export type ModelDisplay = {
+  id: string;
+  name: string;
+  logo: string;
+  vision: boolean;
+  provider?: string; // 添加可选的provider属性
+};
 
 export type AIModel = keyof typeof AI_MODEL_DISPLAY;
 export type AIModelDisplayInfo = (typeof AI_MODEL_DISPLAY)[AIModel];
@@ -34,26 +52,39 @@ const openai = createOpenAI({
   apiKey: process.env.OPENAI_KEY!,
 });
 
+// DeepSeek Client
+const deepseekClient = createDeepSeek({
+  apiKey: process.env.DEEPSEEK_API_KEY || "",
+});
+
 // Create model instances with configurations
 export function createModel(modelId: AIModel, apiKey?: string) {
+  const modelInfo = AI_MODEL_DISPLAY[modelId] as ModelDisplay;
+
+  // Handle DeepSeek models
+  if (modelInfo?.provider === "deepseek") {
+    return deepseekClient(modelId as any);
+  }
+
+  // Handle OpenAI models
   const client = createOpenAI({
     apiKey: apiKey || process.env.OPENAI_KEY!,
   });
 
   return client(modelId, {
     structuredOutputs: true,
-    ...(modelId === 'o3-mini' ? { reasoningEffort: 'medium' } : {}),
+    ...(modelId === "o3-mini" ? { reasoningEffort: "medium" } : {}),
   });
 }
 
 // Token handling
 const MinChunkSize = 140;
-const encoder = getEncoding('o200k_base');
+const encoder = getEncoding("o200k_base");
 
 // trim prompt to maximum context size
 export function trimPrompt(prompt: string, contextSize = 120_000) {
   if (!prompt) {
-    return '';
+    return "";
   }
 
   const length = encoder.encode(prompt).length;
@@ -72,7 +103,7 @@ export function trimPrompt(prompt: string, contextSize = 120_000) {
     chunkSize,
     chunkOverlap: 0,
   });
-  const trimmedPrompt = splitter.splitText(prompt)[0] ?? '';
+  const trimmedPrompt = splitter.splitText(prompt)[0] ?? "";
 
   // last catch, there's a chance that the trimmed prompt is same length as the original prompt, due to how tokens are split & innerworkings of the splitter, handle this case by just doing a hard cut
   if (trimmedPrompt.length === prompt.length) {
