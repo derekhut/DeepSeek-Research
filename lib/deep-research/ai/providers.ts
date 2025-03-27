@@ -11,18 +11,21 @@ export const AI_MODEL_DISPLAY = {
     name: "GPT-4o",
     logo: "/providers/openai.webp",
     vision: true,
+    provider: "openai",
   },
   "gpt-4o-mini": {
     id: "gpt-4o-mini",
     name: "GPT-4o mini",
     logo: "/providers/openai.webp",
     vision: true,
+    provider: "openai",
   },
   "o3-mini": {
     id: "o3-mini",
     name: "o3 mini",
     logo: "/providers/openai.webp",
     vision: false,
+    provider: "openai",
   },
   // DeepSeek Models
   "deepseek-chat": {
@@ -34,14 +37,7 @@ export const AI_MODEL_DISPLAY = {
   },
 } as const;
 
-// 为模型定义添加provider属性
-export type ModelDisplay = {
-  id: string;
-  name: string;
-  logo: string;
-  vision: boolean;
-  provider?: string; // 添加可选的provider属性
-};
+// 每个模型都包含provider属性
 
 export type AIModel = keyof typeof AI_MODEL_DISPLAY;
 export type AIModelDisplayInfo = (typeof AI_MODEL_DISPLAY)[AIModel];
@@ -59,7 +55,7 @@ const deepseekClient = createDeepSeek({
 
 // Create model instances with configurations
 export function createModel(modelId: AIModel, apiKey?: string) {
-  const modelInfo = AI_MODEL_DISPLAY[modelId] as ModelDisplay;
+  const modelInfo = AI_MODEL_DISPLAY[modelId];
 
   // Handle DeepSeek models
   if (modelInfo?.provider === "deepseek") {
